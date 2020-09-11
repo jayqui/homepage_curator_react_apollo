@@ -1,0 +1,5 @@
+query randomUrlQuery($userId: ID!) {
+  randomUrlForCurrentTime(userId: $userId) {
+    randomUrlForCurrentTime
+  }
+}

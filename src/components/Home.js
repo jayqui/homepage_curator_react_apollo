@@ -1,16 +1,13 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { loader } from 'graphql.macro';
 
-const RANDOM_URL = gql`
-{
-  randomUrlForCurrentTime(userId: 2) {
-    randomUrlForCurrentTime
-  }
-}
-`;
+const RANDOM_URL_QUERY = loader('../graphql/random_url_query.graphql');
 
 function Home() {
-  const { loading, error, data } = useQuery(RANDOM_URL);
+  const { loading, error, data } = useQuery(RANDOM_URL_QUERY, {
+    variables: { userId: 2 },
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

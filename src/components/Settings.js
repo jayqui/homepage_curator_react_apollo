@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, gql } from '@apollo/client';
+import { loader } from 'graphql.macro';
 
 import './Settings.css';
 
-const RECURRENCE_GROUPS_QUERY = gql`
-`;
+const RECURRENCE_GROUPS_QUERY = loader('../graphql/recurrence_groups_query.graphql');
 
 function Settings() {
   const [loadingMessage, setLoadingMessage] = useState('Loading . . .');
-  const { loading, error, data } = useQuery(RECURRENCE_GROUPS_QUERY);
+  const { loading, error, data } = useQuery(RECURRENCE_GROUPS_QUERY, {
+    variables: { userId: 2 },
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
