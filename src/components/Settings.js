@@ -1,31 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery, gql } from '@apollo/client';
 
 import './Settings.css';
 
 const RECURRENCE_GROUPS_QUERY = gql`
-{
-  recurrenceGroups(userId: 2) {
-    id
-    name
-    recurrenceRules {
-      id
-      dayOfWeek
-      endTime
-      startTime
-    }
-    linkSubscriptions {
-      id
-      url
-    }
-  }
-}
 `;
 
 function Settings() {
+  const [loadingMessage, setLoadingMessage] = useState('Loading . . .');
   const { loading, error, data } = useQuery(RECURRENCE_GROUPS_QUERY);
 
-  if (loading) return <p>Loading...</p>;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoadingMessage(msg => msg + ' .')
+    }, 100);
+    return () => clearInterval(interval);
+  }, [loading])
+
+  if (loading) return <p>{loadingMessage}</p>;
   if (error) return <p>Error :(</p>;
 
   return (
