@@ -1,16 +1,16 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
-const EXCHANGE_RATES = gql`
+const RANDOM_URL = gql`
 {
-  randomUrlForCurrentTime(userId: 1) {
+  randomUrlForCurrentTime(userId: 2) {
     randomUrlForCurrentTime
   }
 }
 `;
 
 function Home() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+  const { loading, error, data } = useQuery(RANDOM_URL);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

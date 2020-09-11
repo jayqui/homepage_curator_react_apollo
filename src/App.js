@@ -1,9 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from './components/Home';
+import Settings from './components/Settings';
 
 import './App.css';
 
+// const USER = gql`
+// {
+//   randomUrlForCurrentTime(userId: 2) {
+//     randomUrlForCurrentTime
+//   }
+// }
+// `;
 function App() {
   return (
     <div className='App'>
@@ -14,10 +22,11 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/settings">Settings</Link>
+              Hello, Someone
+              {/* <Link to="/authenticate">Login With Fb</Link> */}
             </li>
             <li>
-              <Link to="/authenticate">Login With Fb</Link>
+              <Link to="/settings">Settings</Link>
             </li>
           </ul>
         </nav>
@@ -26,7 +35,7 @@ function App() {
             {/* <About /> */}
           </Route>
           <Route path="/settings">
-            {/* <Users /> */}
+            <Settings />
           </Route>
           <Route exact path="/">
             <Home />
