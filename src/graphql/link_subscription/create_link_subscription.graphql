@@ -1,0 +1,13 @@
+mutation linkSubscriptionCreate($recurrenceGroupId: ID!, $url: String!) {
+  linkSubscriptionCreate(input: {
+    recurrenceGroupId: $recurrenceGroupId,
+    url: $url,
+  }) {
+    linkSubscription {
+      id
+      recurrenceGroupId
+      url
+    }
+    errors
+  }
+}

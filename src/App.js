@@ -5,14 +5,9 @@ import Settings from './components/Settings';
 
 import './App.css';
 
-// const USER = gql`
-// {
-//   randomUrlForCurrentTime(userId: 2) {
-//     randomUrlForCurrentTime
-//   }
-// }
-// `;
 function App() {
+  const userId = 2; // TEMP: make dynamic
+
   return (
     <div className='App'>
       <Router>
@@ -35,7 +30,7 @@ function App() {
             {/* <About /> */}
           </Route>
           <Route path="/settings">
-            <Settings />
+            <Settings userId={userId} />
           </Route>
           <Route exact path="/">
             <Home />

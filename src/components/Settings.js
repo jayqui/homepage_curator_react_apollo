@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { useQuery, gql } from '@apollo/client';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { useQuery } from '@apollo/client';
 import { loader } from 'graphql.macro';
+
+import LinkSubscriptions from './LinkSubscriptions';
 
 import './Settings.css';
 
-const RECURRENCE_GROUPS_QUERY = loader('../graphql/recurrence_groups_query.graphql');
+const RECURRENCE_GROUPS_QUERY = loader('../graphql/recurrence_group/recurrence_groups_query.graphql');
 
-function Settings() {
-  const [loadingMessage, setLoadingMessage] = useState('Loading . . .');
+function Settings({ userId }) {
   const { loading, error, data } = useQuery(RECURRENCE_GROUPS_QUERY, {
-    variables: { userId: 2 },
+    variables: { userId },
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLoadingMessage(msg => msg + ' .')
-    }, 100);
-    return () => clearInterval(interval);
-  }, [loading])
-
-  if (loading) return <p>{loadingMessage}</p>;
+  if (loading) return <p>Loading . . .</p>;
   if (error) return <p>Error :(</p>;
 
   return (
     <div>
       {data.recurrenceGroups.map((recurrenceGroup) => (
-        <div className='RecurrenceGroup'>
-          <h3 key={recurrenceGroup.id}>{recurrenceGroup.name}</h3>
+        <div key={recurrenceGroup.id} className='RecurrenceGroup'>
+          <h3>{recurrenceGroup.name}</h3>
           <div>
             <ul>
               {recurrenceGroup.recurrenceRules.map((recurrenceRule) => (
@@ -37,16 +32,16 @@ function Settings() {
                 </div>
               ))}
             </ul>
-            <ul>
-              {recurrenceGroup.linkSubscriptions.map((linkSubscription) => (
-                <li key={linkSubscription.id}>{linkSubscription.url}</li>
-              ))}
-            </ul>
+            <LinkSubscriptions userId={userId} recurrenceGroup={recurrenceGroup} />
           </div>
         </div>
       ))}
     </div>
   )
+}
+
+Settings.propTypes = {
+  userId: PropTypes.number,
 }
 
 export default Settings
