@@ -1,0 +1,13 @@
+mutation linkSubscriptionUpdate($linkSubscriptionId: ID!, $url: String!) {
+  linkSubscriptionUpdate(input: {
+    linkSubscriptionId: $linkSubscriptionId,
+    url: $url,
+  }) {
+    linkSubscription {
+      id
+      recurrenceGroupId
+      url
+    }
+    errors
+  }
+}

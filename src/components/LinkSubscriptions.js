@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client';
 import { loader } from 'graphql.macro';
 
+import LinkSubscription from './LinkSubscription';
+
 import './LinkSubscriptions.css';
 
 const RECURRENCE_GROUPS_QUERY = loader('../graphql/recurrence_group/recurrence_groups_query.graphql');
@@ -32,7 +34,7 @@ function LinkSubscriptions({ recurrenceGroup, userId }) {
   return (
     <ul className='LinkSubscriptionUrl'>
       {recurrenceGroup.linkSubscriptions.map((linkSubscription) => (
-        <li key={linkSubscription.id}>{linkSubscription.url}</li>
+        <LinkSubscription key={linkSubscription.id} linkSubscription={linkSubscription} userId={userId} />
       ))}
       <li>
         <form onSubmit={handleNewUrlSubmit}>
