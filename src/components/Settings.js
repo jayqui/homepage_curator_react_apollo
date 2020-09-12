@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { loader } from 'graphql.macro';
 
 import LinkSubscriptions from './LinkSubscriptions';
+import RecurrenceRules from './RecurrenceRules';
 
 import './Settings.css';
 
@@ -23,15 +24,7 @@ function Settings({ userId }) {
         <div key={recurrenceGroup.id} className='RecurrenceGroup'>
           <h3>{recurrenceGroup.name}</h3>
           <div>
-            <ul>
-              {recurrenceGroup.recurrenceRules.map((recurrenceRule) => (
-                <div key={recurrenceRule.id}>
-                  <span>{recurrenceRule.dayOfWeek}</span>
-                  <span>{recurrenceRule.startTime}</span>
-                  <span>{recurrenceRule.endTime}</span>
-                </div>
-              ))}
-            </ul>
+            <RecurrenceRules userId={userId} recurrenceGroup={recurrenceGroup} />
             <LinkSubscriptions userId={userId} recurrenceGroup={recurrenceGroup} />
           </div>
         </div>

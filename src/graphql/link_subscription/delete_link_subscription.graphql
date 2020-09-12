@@ -1,0 +1,12 @@
+mutation linkSubscriptionDelete($linkSubscriptionId: ID!) {
+  linkSubscriptionDelete(input: {
+    linkSubscriptionId: $linkSubscriptionId,
+  }) {
+    linkSubscription {
+      id
+      recurrenceGroupId
+      url
+    }
+    errors
+  }
+}
