@@ -9,12 +9,12 @@ const UPDATE_LINK_SUBSCRIPTION = loader('../graphql/link_subscription/update_lin
 function LinkSubscription({ linkSubscription, userId }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newUrl, setNewUrl] = useState(linkSubscription.url);
-  const inputEl = useRef(null);
+  const urlEditInputEl = useRef(null);
   const [updateLinkSubscription] = useMutation(UPDATE_LINK_SUBSCRIPTION, {
     onCompleted: () => setIsEditing(false),
   });
   useEffect(() => {
-    inputEl.current && inputEl.current.focus();
+    urlEditInputEl.current && urlEditInputEl.current.focus();
   }, [isEditing])
 
   function handleNewUrlSubmit(event) {
@@ -28,8 +28,12 @@ function LinkSubscription({ linkSubscription, userId }) {
   }
 
   function handleNewUrlChange(event) {
-    event.preventDefault();
     setNewUrl(event.target.value);
+  }
+
+  function handleCancelUrlClick() {
+    setNewUrl(linkSubscription.url);
+    setIsEditing(false);
   }
 
   const renderStaticState = () => (
@@ -43,8 +47,9 @@ function LinkSubscription({ linkSubscription, userId }) {
   const renderEditingState = () => (
     <li key={linkSubscription.id}>
       <form onSubmit={handleNewUrlSubmit}>
-        <input ref={inputEl} onChange={handleNewUrlChange} value={newUrl} />
+        <input ref={urlEditInputEl} onChange={handleNewUrlChange} value={newUrl} />
         <button type='submit'>Save</button>
+        <button onClick={handleCancelUrlClick} type='button'>Cancel</button>
       </form>
     </li>
   )
@@ -61,4 +66,3 @@ LinkSubscription.propTypes = {
 }
 
 export default LinkSubscription
-
