@@ -1,11 +1,11 @@
 const DAYS_OF_WEEK = [
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
-  "sunday",
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
 ];
 
 function dayIndex(dayOfWeek) {
@@ -14,20 +14,20 @@ function dayIndex(dayOfWeek) {
 
 export function compressRecurrenceRules(recurrenceRules) {
   const result = [];
-  let currentRuleObj = {};
+  let currentRuleObj = {
+    beginDay: recurrenceRules[0] && recurrenceRules[0].dayOfWeek,
+    startTime: recurrenceRules[0] && recurrenceRules[0].startTime,
+    endTime: recurrenceRules[0] && recurrenceRules[0].endTime,
+  };
 
   recurrenceRules.forEach((recurrenceRule, index) => {
     const { dayOfWeek, startTime, endTime } = recurrenceRule;
 
-    currentRuleObj.beginDay = currentRuleObj.beginDay || dayOfWeek;
-    currentRuleObj.startTime = currentRuleObj.startTime || startTime;
-    currentRuleObj.endTime = currentRuleObj.endTime || endTime;
-
-    const currentRuleObjEndDayIndex = currentRuleObj.endDay ? dayIndex(currentRuleObj.endDay) : null;
-    const dayAfterCurrentRuleObjEndDay = currentRuleObj.endDay ? DAYS_OF_WEEK[currentRuleObjEndDayIndex + 1] : null;
+    const currentRuleObjEndDayIndex = dayIndex(currentRuleObj.endDay);
+    const dayAfterCurrentRuleObjEndDay = DAYS_OF_WEEK[currentRuleObjEndDayIndex + 1];
 
     const shouldCompressIntoPrior =
-      (!dayAfterCurrentRuleObjEndDay || dayAfterCurrentRuleObjEndDay === dayOfWeek) &&
+      (!currentRuleObj.endDay || dayAfterCurrentRuleObjEndDay === dayOfWeek) &&
       currentRuleObj.startTime === startTime &&
       currentRuleObj.endTime === endTime;
     const isLastRecurrenceRule = index === recurrenceRules.length - 1;
@@ -46,8 +46,6 @@ export function compressRecurrenceRules(recurrenceRules) {
       };
     }
   });
-
-  console.log("result: ", result);
 
   return result;
 }
