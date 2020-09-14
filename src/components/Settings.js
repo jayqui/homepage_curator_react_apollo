@@ -18,6 +18,8 @@ function Settings({ userId }) {
   if (loading) return <p>Loading . . .</p>;
   if (error) return <p>Error :(</p>;
 
+  console.log(JSON.stringify(data.recurrenceGroups[0].recurrenceRules));
+
   return (
     <div>
       {data.recurrenceGroups.map((recurrenceGroup) => (
