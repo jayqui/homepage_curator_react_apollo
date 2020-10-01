@@ -5,7 +5,8 @@ import App from './App';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://homepage-curator-graphql-rails.herokuapp.com/graphql',
+  // uri: 'https://homepage-curator-graphql-rails.herokuapp.com/graphql',
+  uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache()
 });
 

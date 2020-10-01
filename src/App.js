@@ -6,7 +6,7 @@ import Settings from './components/Settings';
 import './App.css';
 
 function App() {
-  const userId = 2; // TODO: make dynamic
+  const userId = 1; // TODO: make dynamic
 
   return (
     <div className='App'>
