@@ -7,7 +7,7 @@ import LinkSubscription from './LinkSubscription';
 import './LinkSubscriptions.css';
 
 const RECURRENCE_GROUPS_QUERY = loader('../graphql/recurrence_group/recurrence_groups_query.graphql');
-const CREATE_LINK_SUBSCRIPTION = loader('../graphql/link_subscription/create_link_subscription.graphql');
+const CREATE_LINK_SUBSCRIPTION = loader('../graphql/link_subscription/mutations/create_link_subscription.graphql');
 
 function LinkSubscriptions({ recurrenceGroup, userId }) {
   const [newUrl, setNewUrl] = useState('');

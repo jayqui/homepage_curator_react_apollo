@@ -4,8 +4,8 @@ import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/client';
 
 const RECURRENCE_GROUPS_QUERY = loader('../graphql/recurrence_group/recurrence_groups_query.graphql');
-const UPDATE_LINK_SUBSCRIPTION = loader('../graphql/link_subscription/update_link_subscription.graphql');
-const DELETE_LINK_SUBSCRIPTION = loader('../graphql/link_subscription/delete_link_subscription.graphql');
+const UPDATE_LINK_SUBSCRIPTION = loader('../graphql/link_subscription/mutations/update_link_subscription.graphql');
+const DELETE_LINK_SUBSCRIPTION = loader('../graphql/link_subscription/mutations/delete_link_subscription.graphql');
 
 function LinkSubscription({ linkSubscription, userId }) {
   const [isEditing, setIsEditing] = useState(false);
