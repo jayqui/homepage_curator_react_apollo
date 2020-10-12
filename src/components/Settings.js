@@ -16,9 +16,10 @@ function Settings({ userId }) {
   });
 
   if (loading) return <p>Loading . . .</p>;
-  if (error) return <p>Error :(</p>;
-
-  console.log(JSON.stringify(data.recurrenceGroups[0].recurrenceRules));
+  if (error) {
+    console.log('error', error)
+    return <p>Error :(</p>;
+  }
 
   return (
     <div>

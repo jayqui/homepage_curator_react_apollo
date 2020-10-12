@@ -1,0 +1,17 @@
+mutation recurrenceRuleUpdate($recurrenceRuleId: ID!, $attributes: RecurrenceRuleAttributes!) {
+  recurrenceRuleUpdate(input: {
+    recurrenceRuleId: $recurrenceRuleId,
+    attributes: $attributes,
+  }) {
+    recurrenceRule {
+      id
+      recurrenceGroupId
+      beginDay
+      endDay
+      allDerivedDays
+      startTime
+      endTime
+    }
+    errors
+  }
+}

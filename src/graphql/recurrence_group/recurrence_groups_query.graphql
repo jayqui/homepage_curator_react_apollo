@@ -4,9 +4,10 @@ query recurrenceGroupsQuery($userId: ID!) {
     name
     recurrenceRules {
       id
-      dayOfWeek
       endTime
       startTime
+      beginDay
+      endDay
     }
     linkSubscriptions {
       id
