@@ -1,0 +1,12 @@
+mutation recurrenceGroupUpdate($recurrenceGroupId: ID!, $name: String!) {
+  recurrenceGroupUpdate(input: {
+    recurrenceGroupId: $recurrenceGroupId,
+    name: $name,
+  }) {
+    recurrenceGroup {
+      id
+      name
+    }
+    errors
+  }
+}
