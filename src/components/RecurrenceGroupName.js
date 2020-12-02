@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useMutation } from '@apollo/client';
 import { loader } from 'graphql.macro';
 import PropTypes from 'prop-types'
+import EditIcon from '@material-ui/icons/Edit';
 
 const UPDATE_RECURRENCE_GROUP = loader('../graphql/recurrence_group/mutations/update_recurrence_group.graphql');
 
@@ -44,7 +45,7 @@ function RecurrenceGroupName({ recurrenceGroup }) {
         <h3>
           {recurrenceGroup.name}
           <button type='button' onClick={() => setIsEditingName(true)}>
-            Edit
+            <EditIcon />
           </button>
         </h3>
       </>

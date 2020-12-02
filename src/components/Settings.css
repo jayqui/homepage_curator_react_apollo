@@ -1,5 +1,3 @@
-.RecurrenceGroup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.addNewRecurrenceGroupContainer {
+  margin: 8px;
 }

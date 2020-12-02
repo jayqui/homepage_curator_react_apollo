@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import LinkSubscriptions from './LinkSubscriptions';
 import RecurrenceRules from './RecurrenceRules';
@@ -22,12 +24,15 @@ function RecurrenceGroup({ userId, recurrenceGroup }) {
           id="panel1a-header"
         >
           <div className='recurrenceGroupName'>
-            <RecurrenceGroupName recurrenceGroup={recurrenceGroup} />
+            <div>
+              <RecurrenceGroupName recurrenceGroup={recurrenceGroup} />
+              <DeleteIcon />
+            </div>
+            <RecurrenceRules userId={userId} recurrenceGroup={recurrenceGroup} />
           </div>
         </AccordionSummary>
         <AccordionDetails>
           <div>
-            <RecurrenceRules userId={userId} recurrenceGroup={recurrenceGroup} />
             <LinkSubscriptions userId={userId} recurrenceGroup={recurrenceGroup} />
           </div>
         </AccordionDetails>

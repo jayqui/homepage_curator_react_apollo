@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/client';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const UPDATE_RECURRENCE_RULE = loader('../graphql/recurrence_rule/mutations/update_recurrence_rule.graphql');
 
@@ -56,28 +60,39 @@ function RecurrenceRule({ recurrenceRule }) {
   const ALL_HOUR_OPTIONS = Array.from(Array(24).keys()).map(n => ('0' + n).slice(-2)) // ['00', '01', '02', ... '23']
   const ALL_MIN_SEC_OPTIONS = Array.from(Array(60).keys()).map(n => ('0' + (n)).slice(-2)) // ['00', '01', '02', ... '59']
 
+  const formHelperLabels = {
+    beginDay: "Begin Day",
+    endDay: "End Day",
+    startHour: "Start Time",
+    endHour: "End Time",
+  }
+
   function selectFor ({ value, inputName, options }) {
     return (
-      <select
-        value={value}
-        onChange={(event) => handleInputChange(event, inputName)}
-      >
-        {options.map((option) => (
-          <option key={`${option}-begin`} value={option}>{option}</option>
-        ))}
-      </select>
+      <FormControl>
+        {/* <InputLabel shrink> {inputName} </InputLabel> */}
+        <Select
+          value={value}
+          onChange={(event) => handleInputChange(event, inputName)}
+        >
+          {options.map((option) => (
+            <MenuItem key={`${option}-begin`} value={option}>{option}</MenuItem>
+          ))}
+        </Select>
+        <FormHelperText>{formHelperLabels[inputName]}</FormHelperText>
+      </FormControl>
     )
   }
 
   return (
     <div>
-      {selectFor({ value: newBeginDay, inputName: 'beginDay', options: ALL_DAYS })}-
-      {selectFor({ value: newEndDay, inputName: 'endDay', options: ALL_DAYS })}|
-      {selectFor({ value: newStartHour, inputName: 'startHour', options: ALL_HOUR_OPTIONS })}:
-      {selectFor({ value: newStartMinute, inputName: 'startMinute', options: ALL_MIN_SEC_OPTIONS })}:
-      {selectFor({ value: newStartSecond, inputName: 'startSecond', options: ALL_MIN_SEC_OPTIONS })}-
-      {selectFor({ value: newEndHour, inputName: 'endHour', options: ALL_HOUR_OPTIONS })}:
-      {selectFor({ value: newEndMinute, inputName: 'endMinute', options: ALL_MIN_SEC_OPTIONS })}:
+      {selectFor({ value: newBeginDay, inputName: 'beginDay', options: ALL_DAYS })}
+      {selectFor({ value: newEndDay, inputName: 'endDay', options: ALL_DAYS })}
+      {selectFor({ value: newStartHour, inputName: 'startHour', options: ALL_HOUR_OPTIONS })}
+      {selectFor({ value: newStartMinute, inputName: 'startMinute', options: ALL_MIN_SEC_OPTIONS })}
+      {selectFor({ value: newStartSecond, inputName: 'startSecond', options: ALL_MIN_SEC_OPTIONS })}
+      {selectFor({ value: newEndHour, inputName: 'endHour', options: ALL_HOUR_OPTIONS })}
+      {selectFor({ value: newEndMinute, inputName: 'endMinute', options: ALL_MIN_SEC_OPTIONS })}
       {selectFor({ value: newEndSecond, inputName: 'endSecond', options: ALL_MIN_SEC_OPTIONS })}
     </div>
   )
